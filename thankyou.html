@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank You — Elites Grid CAT Course</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="config.js"></script>
+
+  <style>
+    /* ── CIRCULAR TIMER ── */
+    .timer-wrap {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 32px;
+    }
+
+    .timer-svg {
+      width: 140px;
+      height: 140px;
+      transform: rotate(-90deg);
+    }
+
+    .timer-track {
+      fill: none;
+      stroke: rgba(201, 151, 58, 0.15);
+      stroke-width: 7;
+    }
+
+    .timer-arc {
+      fill: none;
+      stroke: url(#timerGrad);
+      stroke-width: 7;
+      stroke-linecap: round;
+      stroke-dasharray: 345.4; /* 2π × 55 */
+      stroke-dashoffset: 0;
+      transition: stroke-dashoffset 1s linear, stroke 0.5s;
+    }
+
+    .timer-arc.warning {
+      stroke: url(#timerGradWarn);
+    }
+
+    .timer-inner {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+    }
+
+    .timer-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.6rem;
+      font-weight: 900;
+      line-height: 1;
+      background: linear-gradient(135deg, #c9973a, #f5cc6a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      transition: color 0.5s;
+    }
+
+    .timer-number.warning {
+      background: linear-gradient(135deg, #f97316, #f87171);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .timer-unit {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ── STATUS MESSAGE ── */
+    .status-msg {
+      transition: opacity 0.5s ease;
+    }
+
+    .status-msg.fade {
+      opacity: 0;
+    }
+
+    .status-before {
+      display: block;
+    }
+
+    .status-after {
+      display: none;
+    }
+
+    /* pulse ring while counting */
+    @keyframes pulse-ring {
+      0%   { transform: scale(1);   opacity: 0.5; }
+      70%  { transform: scale(1.12); opacity: 0; }
+      100% { transform: scale(1.12); opacity: 0; }
+    }
+
+    .timer-pulse {
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 2px solid rgba(201, 151, 58, 0.35);
+      animation: pulse-ring 2s ease-out infinite;
+      pointer-events: none;
+    }
+
+    /* done checkmark burst */
+    @keyframes burst {
+      0%   { transform: scale(0.6); opacity: 0; }
+      60%  { transform: scale(1.08); opacity: 1; }
+      100% { transform: scale(1);   opacity: 1; }
+    }
+
+    .timer-done-icon {
+      display: none;
+      font-size: 2.8rem;
+      animation: burst 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards;
+    }
+
+    /* spinner dots while counting */
+    .dots {
+      display: inline-flex;
+      gap: 4px;
+      margin-left: 4px;
+      vertical-align: middle;
+    }
+    .dots span {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+      animation: dot-bounce 1.2s ease-in-out infinite;
+    }
+    .dots span:nth-child(2) { animation-delay: 0.2s; }
+    .dots span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes dot-bounce {
+      0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+      40%            { transform: scale(1);   opacity: 1; }
+    }
+
+    /* highlight box for post-timer instruction */
+    .instruction-box {
+      display: none;
+      margin-top: 16px;
+      padding: 18px 22px;
+      border-radius: var(--radius);
+      background: rgba(248, 113, 113, 0.08);
+      border: 1px solid rgba(248, 113, 113, 0.3);
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      text-align: left;
+    }
+
+    .instruction-box strong { color: #f87171; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">HY</div>
+      <span class="logo-text">HY MBA</span>
+    </a>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="thankyou-page">
+  <div class="thankyou-wrap">
+
+    <!-- ── CIRCULAR COUNTDOWN TIMER ── -->
+    <div class="timer-wrap">
+      <div class="timer-pulse" id="timer-pulse"></div>
+
+      <svg class="timer-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="timerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stop-color="#8a6520"/>
+            <stop offset="50%"  stop-color="#c9973a"/>
+            <stop offset="100%" stop-color="#f5cc6a"/>
+          </linearGradient>
+          <linearGradient id="timerGradWarn" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stop-color="#f97316"/>
+            <stop offset="100%" stop-color="#f87171"/>
+          </linearGradient>
+        </defs>
+        <circle class="timer-track" cx="60" cy="60" r="55"/>
+        <circle class="timer-arc"   cx="60" cy="60" r="55" id="timer-arc"/>
+      </svg>
+
+      <div class="timer-inner">
+        <span class="timer-number" id="timer-number">2:00</span>
+        <span class="timer-unit"   id="timer-unit">seconds</span>
+        <span class="timer-done-icon" id="timer-done-icon">⚠️</span>
+      </div>
+    </div>
+
+    <!-- ── TITLE ── -->
+    <h1 class="thankyou-title">You're Almost In!</h1>
+
+    <!-- ── STATUS MESSAGE (swaps after timer) ── -->
+    <p class="thankyou-sub status-msg" id="status-msg">
+      <span class="status-before" id="status-before">
+        <strong>We are processing to redirect you into the course.</strong><span class="dots"><span></span><span></span><span></span></span><br>
+        Wait for a few seconds — hang tight!
+      </span>
+      <span class="status-after" id="status-after">
+        <strong>We are facing a verification issue — don't worry, you're in!</strong><br>
+        Just follow the instructions below and get your course access directly from our Telegram.
+      </span>
+    </p>
+
+    <!-- Instruction box (shows after timer) -->
+    <div class="instruction-box" id="instruction-box">
+      <strong>📌 What to do now:</strong><br><br>
+      Send your <strong>payment screenshot</strong> on our Telegram channel. Our team will verify and send you the <strong>complete course link</strong> within a few minutes. We are available 24×7.
+    </div>
+
+    <!-- ── ACTIONS ── -->
+    <div class="thankyou-actions" style="margin-top:28px;">
+      <a href="" id="tg-admin-btn" target="_blank" class="btn btn-primary btn-full" style="font-size:1.05rem;padding:16px 32px;">
+         Send Screenshot on Telegram →
+      </a>
+      <a href="" id="tg-free-btn" target="_blank" class="btn btn-ghost btn-full">
+         Join Free Resources Group
+      </a>
+    </div>
+
+    <!-- ── NOTE ── -->
+    <div class="thankyou-note" style="margin-top:24px;">
+      If you are facing issue in redirecting into course just connect us on telegram <strong>Send SCREENSHOTS of Payment on telegram</strong> and get your course access instantly.
+    </div>
+
+    <!-- ── NOTE ── -->
+    <div class="thankyou-note" style="margin-top:24px;">
+      Once your payment is verified, you'll receive the <strong>complete Elites Grid CAT 2025 course access</strong> directly on Telegram. All content is sequentially arranged — just start studying from Day 1.
+    </div>
+
+    <!-- ── MINI FAQ ── -->
+    <div class="mini-faq">
+      <div class="mini-faq-item">
+        <strong>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px;margin-bottom:2px;color:var(--gold)"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/><path d="M12 2v2"/><path d="M10 2h4"/></svg>
+          How long does verification take?
+        </strong>
+        <p>Typically within a few minutes. If the timer ends without a redirect, just message us on Telegram.</p>
+      </div>
+      <div class="mini-faq-item">
+        <strong>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px;margin-bottom:2px;color:var(--gold)"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Where will I get the course?
+        </strong>
+        <p>Directly on Telegram. After verification, you'll receive the course access instantly.</p>
+      </div>
+      <div class="mini-faq-item">
+        <strong>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px;margin-bottom:2px;color:var(--gold)"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/><circle cx="12" cy="12" r="4"/></svg>
+          Didn't get the link?
+        </strong>
+        <p>Message us on Telegram immediately. We are available 24×7 to help you out.</p>
+      </div>
+    </div>
+
+    <p style="margin-top:32px;font-size:0.85rem;color:var(--text-muted);">
+      <a href="index.html" style="color:var(--gold);">← Back to Home</a>
+    </p>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer id="site-footer">
+  <div class="footer-inner">
+    <div class="footer-bottom" style="border-top:none;padding-top:0;">
+      <p>© HY MBA TEAM. All rights reserved.</p>
+      <div style="display:flex;gap:16px;">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── HEADER SCROLL ── */
+const header = document.getElementById('site-header');
+window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 40));
+
+/* ── LINKS ── */
+document.getElementById('tg-admin-btn').href = CONFIG.links.telegram_main;
+document.getElementById('tg-free-btn').href  = CONFIG.links.free_resources;
+
+/* ── CIRCULAR COUNTDOWN TIMER ── */
+const TOTAL_SECONDS = 120; // 2 minutes
+const CIRCUMFERENCE  = 2 * Math.PI * 55; // ≈ 345.4
+
+const arc         = document.getElementById('timer-arc');
+const numEl       = document.getElementById('timer-number');
+const unitEl      = document.getElementById('timer-unit');
+const pulseEl     = document.getElementById('timer-pulse');
+const doneIcon    = document.getElementById('timer-done-icon');
+const statusBefore= document.getElementById('status-before');
+const statusAfter = document.getElementById('status-after');
+const statusMsg   = document.getElementById('status-msg');
+const instrBox    = document.getElementById('instruction-box');
+
+arc.style.strokeDasharray  = CIRCUMFERENCE;
+arc.style.strokeDashoffset = 0;
+
+let secondsLeft = TOTAL_SECONDS;
+
+function formatTime(s) {
+  const m   = Math.floor(s / 60);
+  const sec = s % 60;
+  if (m > 0) return m + ':' + String(sec).padStart(2, '0');
+  return String(sec);
+}
+
+function updateTimer() {
+  const pct    = secondsLeft / TOTAL_SECONDS;
+  const offset = CIRCUMFERENCE * (1 - pct);
+  arc.style.strokeDashoffset = offset;
+
+  numEl.textContent  = formatTime(secondsLeft);
+  unitEl.textContent = secondsLeft > 60 ? 'min left' : 'sec left';
+
+  // warning colours under 30s
+  if (secondsLeft <= 30) {
+    arc.classList.add('warning');
+    numEl.classList.add('warning');
+  }
+
+  if (secondsLeft <= 0) {
+    clearInterval(timerInterval);
+    onTimerEnd();
+    return;
+  }
+
+  secondsLeft--;
+}
+
+function onTimerEnd() {
+  /* Arc fully depleted */
+  arc.style.strokeDashoffset = CIRCUMFERENCE;
+
+  /* Stop pulse */
+  pulseEl.style.display = 'none';
+
+  /* Show warning icon inside circle */
+  numEl.style.display  = 'none';
+  unitEl.style.display = 'none';
+  doneIcon.style.display = 'block';
+
+  /* Swap status message */
+  statusMsg.classList.add('fade');
+  setTimeout(() => {
+    statusBefore.style.display = 'none';
+    statusAfter.style.display  = 'block';
+    instrBox.style.display     = 'block';
+    statusMsg.classList.remove('fade');
+  }, 500);
+}
+
+/* start immediately */
+updateTimer();
+const timerInterval = setInterval(updateTimer, 1000);
+</script>
+</body>
+</html>

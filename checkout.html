@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enroll — Elites Grid CAT Course</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="config.js"></script>
+  <style>
+    .file-selected-name {
+      font-size: 0.82rem;
+      color: var(--gold-light);
+      margin-top: 6px;
+      font-weight: 600;
+    }
+    .submit-loader { display:none; }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none !important; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">HY</div>
+      <span class="logo-text">HY MBA</span>
+    </a>
+    <nav class="site-nav">
+      <a href="index.html" class="nav-link">← Back to Home</a>
+    </nav>
+  </div>
+</header>
+
+<!-- CHECKOUT -->
+<main class="checkout-page">
+  <div class="checkout-wrap">
+
+    <!-- Stepper -->
+    <div class="stepper">
+      <div class="step-node active" id="sn1">
+        <div class="step-circle">1</div>
+        <div class="step-label">Details</div>
+      </div>
+      <div class="step-line" id="sl1"></div>
+      <div class="step-node" id="sn2">
+        <div class="step-circle">2</div>
+        <div class="step-label">Payment</div>
+      </div>
+      <div class="step-line" id="sl2"></div>
+      <div class="step-node" id="sn3">
+        <div class="step-circle">3</div>
+        <div class="step-label">Confirm</div>
+      </div>
+    </div>
+
+    <!-- STEP 1: Course Details -->
+    <div class="checkout-panel active" id="panel1">
+      <div class="panel-header">
+        <h2>You're One Step Away</h2>
+        <p>Review what you're getting before you pay.</p>
+      </div>
+
+      <div class="course-summary-card">
+        <h3 id="cs-name" style="color:var(--gold-light);font-family:'Playfair Display',serif;"></h3>
+        <div class="cs-price">
+          <span class="cs-original" id="cs-original"></span>
+          <span class="cs-current" id="cs-current"></span>
+        </div>
+        <ul class="cs-list">
+          <li><span class="ck">✓</span> Complete Recorded Video Lectures</li>
+          <li><span class="ck">✓</span> Study Notes & PDFs</li>
+          <li><span class="ck">✓</span> Full-Length Mock Tests</li>
+          <li><span class="ck">✓</span> PYQs with Solutions</li>
+          <li><span class="ck">✓</span> SimCAT Sessions</li>
+          <li><span class="ck">✓</span> Knockout Sessions</li>
+          <li><span class="ck">✓</span> VARC — Complete Coverage</li>
+          <li><span class="ck">✓</span> LRDI & QA — All Topics</li>
+          <li><span class="ck">✓</span> 24×7 Telegram Support</li>
+          <li><span class="ck">✓</span> Lifetime Telegram Access</li>
+        </ul>
+        <div class="course-meta" id="cs-meta"></div>
+      </div>
+
+      <div style="padding:16px 0 24px;display:flex;align-items:center;gap:10px;font-size:0.85rem;color:var(--text-muted);">
+        <span>🔒</span>
+        <span>Direct UPI payment — no middlemen, no payment gateway. Your money goes straight to our account.</span>
+      </div>
+
+      <button class="btn btn-primary btn-full" onclick="goStep(2)">Proceed to Payment →</button>
+    </div>
+
+    <!-- STEP 2: Payment QR -->
+    <div class="checkout-panel" id="panel2">
+      <div class="panel-header">
+        <h2>Complete Your Payment</h2>
+        <p>Scan the QR code or copy the UPI ID to pay.</p>
+      </div>
+
+      <div class="qr-container">
+        <div class="qr-box" id="qr-box"></div>
+        <div id="qr-expired-msg" class="qr-expired-msg" style="display:none;">
+          <span style="font-size:2rem;">⏰</span>
+          <strong style="color:var(--danger);">QR Expired</strong>
+          <p>Click below to generate a new QR code.</p>
+          <button class="btn btn-ghost" onclick="resetTimer()">Regenerate QR</button>
+        </div>
+
+        <div class="amount-tag">₹<span id="pay-amount"></span></div>
+
+        <div class="upi-copy-row">
+          <span class="upi-id-text" id="upi-display"></span>
+          <button class="copy-btn" id="copy-btn">Copy</button>
+        </div>
+
+        <div class="timer-section">
+          <div class="timer-label">QR valid for</div>
+          <div class="timer-bar"><div class="timer-fill" id="timer-fill"></div></div>
+          <div class="timer-display" id="timer-display">05:00</div>
+        </div>
+      </div>
+
+      <div class="payment-steps">
+        <h4>How to Pay</h4>
+        <ol>
+          <li>Open PhonePe, GPay, Paytm, or any UPI app</li>
+          <li>Scan the QR code above OR enter the UPI ID manually</li>
+          <li>Enter amount: <strong style="color:var(--gold-light)">₹999</strong></li>
+          <li>Complete the payment</li>
+          <li>Note your UTR / Transaction ID — you'll need it next</li>
+        </ol>
+      </div>
+
+      <button class="btn btn-primary btn-full" onclick="goStep(3)">I Have Paid — Submit Proof →</button>
+      <button class="btn btn-ghost btn-full" style="margin-top:12px;" onclick="goStep(1)">← Go Back</button>
+    </div>
+
+    <!-- STEP 3: Submit Proof -->
+    <div class="checkout-panel" id="panel3">
+      <div class="panel-header">
+        <h2>Almost Done!</h2>
+        <p>Submit your payment screenshot and UTR number. It just take 2 miniuts to verify and you'll redirected into course .</p>
+      </div>
+
+      <div class="proof-form" id="proof-form">
+        <div class="form-field">
+          <label for="inp-name">Full Name</label>
+          <input type="text" id="inp-name" placeholder="Your full name" required>
+        </div>
+        <div class="form-field">
+          <label for="inp-email">Email Address</label>
+          <input type="email" id="inp-email" placeholder="yourname@email.com" required>
+        </div>
+        <div class="form-field">
+          <label for="inp-phone">Phone Number</label>
+          <input type="tel" id="inp-phone" placeholder="10-digit mobile number" required>
+        </div>
+        <div class="form-field">
+          <label for="inp-utr">UTR / Transaction ID</label>
+          <input type="text" id="inp-utr" placeholder="e.g. 412321567891" required>
+        </div>
+        <div class="form-field">
+          <label>Payment Screenshot</label>
+          <label class="file-label" for="inp-screenshot">
+            <span class="file-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: 0 auto 10px; opacity: 0.8;">
+  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+  <circle cx="12" cy="13" r="4" />
+</svg></span>
+            <span class="file-text">Tap to upload screenshot</span>
+            <span class="file-subtext">JPG, PNG accepted · Max 10MB</span>
+          </label>
+          <input type="file" id="inp-screenshot" accept="image/*" required>
+          <div class="file-selected-name" id="file-name-display"></div>
+        </div>
+
+
+        <button class="btn btn-primary btn-full" id="submit-btn" onclick="submitForm(event)">
+          <span class="submit-text">Submit & Complete Enrollment</span>
+          <span class="submit-loader">Submitting...</span>
+        </button>
+        <button class="btn btn-ghost btn-full" style="margin-top:12px;" onclick="goStep(2)">← Go Back</button>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer id="site-footer">
+  <div class="footer-inner">
+    <div class="footer-bottom" style="border-top:none;padding-top:0;">
+      <p>© HY MBA TEAM. All rights reserved.</p>
+      <div style="display:flex;gap:16px;">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a id="f-support" href="#">Support</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+// Header scroll
+const header = document.getElementById('site-header');
+window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 40));
+
+// Populate from config
+document.getElementById('cs-name').textContent = CONFIG.course.name + ' (2025 Complete Batch)';
+document.getElementById('cs-original').textContent = '₹' + CONFIG.course.original_price.toLocaleString('en-IN');
+document.getElementById('cs-current').textContent = '₹' + CONFIG.course.price;
+document.getElementById('pay-amount').textContent = CONFIG.course.price;
+document.getElementById('upi-display').textContent = CONFIG.upi.id;
+const tgLinks = document.querySelectorAll('#tg-note-link, #f-support');
+tgLinks.forEach(l => l.href = CONFIG.links.telegram_support);
+
+const metaContainer = document.getElementById('cs-meta');
+CONFIG.course.target_years.forEach(y => {
+  const tag = document.createElement('span');
+  tag.className = 'meta-tag';
+  tag.textContent = y;
+  metaContainer.appendChild(tag);
+});
+const supTag = document.createElement('span');
+supTag.className = 'meta-tag';
+supTag.textContent = '24×7 Support';
+metaContainer.appendChild(supTag);
+
+// QR Generation
+let qrInstance = null;
+function generateQR() {
+  const box = document.getElementById('qr-box');
+  box.style.display = 'flex';
+  document.getElementById('qr-expired-msg').style.display = 'none';
+  box.innerHTML = '';
+  const upiLink = `upi://pay?pa=${CONFIG.upi.id}&pn=${encodeURIComponent(CONFIG.upi.name)}&am=${CONFIG.course.price}&cu=${CONFIG.upi.currency}&tn=ElitesGridCAT2025`;
+  qrInstance = new QRCode(box, {
+    text: upiLink,
+    width: 200,
+    height: 200,
+    colorDark: '#1a1a2e',
+    colorLight: '#ffffff',
+    correctLevel: QRCode.CorrectLevel.H
+  });
+}
+
+// Timer
+let timerInterval = null;
+let totalSeconds = CONFIG.course.qr_timer_seconds || 300;
+let timeLeft = totalSeconds;
+
+function formatTime(s) {
+  const m = Math.floor(s / 60);
+  const sec = s % 60;
+  return `${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
+}
+
+function startTimer() {
+  clearInterval(timerInterval);
+  timeLeft = totalSeconds;
+  const fill = document.getElementById('timer-fill');
+  const display = document.getElementById('timer-display');
+  fill.style.width = '100%';
+  fill.classList.remove('warning');
+  display.classList.remove('warning');
+  display.textContent = formatTime(timeLeft);
+
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    const pct = (timeLeft / totalSeconds) * 100;
+    fill.style.width = pct + '%';
+    display.textContent = formatTime(timeLeft);
+    if (timeLeft <= 60) {
+      fill.classList.add('warning');
+      display.classList.add('warning');
+    }
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      document.getElementById('qr-box').style.display = 'none';
+      document.getElementById('qr-expired-msg').style.display = 'flex';
+      display.textContent = '00:00';
+    }
+  }, 1000);
+}
+
+function resetTimer() {
+  generateQR();
+  startTimer();
+}
+
+// Copy UPI
+document.getElementById('copy-btn').addEventListener('click', () => {
+  navigator.clipboard.writeText(CONFIG.upi.id).then(() => {
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = 'Copied!';
+    btn.style.background = 'var(--gold)';
+    btn.style.color = '#06060f';
+    setTimeout(() => {
+      btn.textContent = 'Copy';
+      btn.style.background = '';
+      btn.style.color = '';
+    }, 2500);
+  });
+});
+
+// File input display
+document.getElementById('inp-screenshot').addEventListener('change', function() {
+  const display = document.getElementById('file-name-display');
+  display.textContent = this.files[0] ? '✓ ' + this.files[0].name : '';
+});
+
+// Step navigation
+function goStep(n) {
+  [1,2,3].forEach(i => {
+    document.getElementById(`panel${i}`).classList.toggle('active', i === n);
+    const node = document.getElementById(`sn${i}`);
+    node.classList.toggle('active', i === n);
+    node.classList.toggle('done', i < n);
+    if (i < n) node.querySelector('.step-circle').textContent = '✓';
+    else node.querySelector('.step-circle').textContent = i;
+  });
+  [1,2].forEach(i => {
+    const line = document.getElementById(`sl${i}`);
+    if (line) line.classList.toggle('done', i < n);
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  if (n === 2) {
+    generateQR();
+    startTimer();
+  }
+}
+
+// Form submission
+function submitForm(e) {
+  e.preventDefault();
+  const name = document.getElementById('inp-name').value.trim();
+  const email = document.getElementById('inp-email').value.trim();
+  const phone = document.getElementById('inp-phone').value.trim();
+  const utr = document.getElementById('inp-utr').value.trim();
+  const file = document.getElementById('inp-screenshot').files[0];
+
+  if (!name || !email || !phone || !utr || !file) {
+    alert('Please fill all fields and upload your payment screenshot.');
+    return;
+  }
+
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.querySelector('.submit-text').style.display = 'none';
+  btn.querySelector('.submit-loader').style.display = 'inline';
+
+  setTimeout(() => {
+    window.location.href = 'thankyou.html';
+  }, 1500);
+}
+</script>
+</body>
+</html>
