@@ -24,7 +24,7 @@ const CONFIG = {
   // ADD STUDENT REVIEW SCREENSHOT FILENAMES HERE
   // Place image files inside images/reviews/ folder first
   // Example: review_images: ["review1.jpg", "review2.jpg"]
-  review_images: ["review1.jpg","review2.jpg"],
+  review_images: ["review1.jpg","review2.jpg","review3.jpg","review4.jpg"],
 
   testimonials: [
     {
