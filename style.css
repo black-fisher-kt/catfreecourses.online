@@ -349,9 +349,12 @@ section { padding: 90px 0; }
   display: flex;
   gap: 40px;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
-.stat-item { display: flex; flex-direction: column; }
+.stat-item { display: flex; flex-direction: column; align-items: center; text-align: center; }
 .stat-num {
   font-family: 'Playfair Display', serif;
   font-size: 1.8rem;

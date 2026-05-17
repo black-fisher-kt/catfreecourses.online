@@ -219,7 +219,7 @@ const header = document.getElementById('site-header');
 window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 40));
 
 // Populate from config
-document.getElementById('cs-name').textContent = CONFIG.course.name + ' (2026 & 2027 Complete Batch) @ ₹1999';
+document.getElementById('cs-name').textContent = 'Premium CAT 2025 — Complete Course @ ₹1999';
 document.getElementById('cs-original').textContent = '₹' + CONFIG.course.original_price.toLocaleString('en-IN');
 document.getElementById('cs-current').textContent = '₹' + CONFIG.course.price;
 document.getElementById('pay-amount').textContent = CONFIG.course.price;
