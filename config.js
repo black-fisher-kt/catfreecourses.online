@@ -1,7 +1,7 @@
 const CONFIG = {
   upi: {
     id: "hymba@ybl",
-    name: "HYMBA CAT Course",
+    name: "CFC CAT Course",
     amount: 1999,
     currency: "INR"
   },
@@ -13,7 +13,7 @@ const CONFIG = {
     telegram_admin: "https://t.me/hymbaadmin"
   },
   course: {
-    name: "hyegmba",
+    name: "CEGFC",
     price: 1999,
     original_price: 40000,
     tagline: "India's Most Affordable Elite CAT Preparation",

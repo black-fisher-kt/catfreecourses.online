@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Enroll — HYMBA CAT Course</title>
+  <title>Enroll — CAT Free Courses</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
@@ -26,8 +26,8 @@
 <header id="site-header">
   <div class="header-inner">
     <a href="index.html" class="logo">
-      <div class="logo-mark">HY</div>
-      <span class="logo-text">HY MBA</span>
+      <div class="logo-mark">CFC</div>
+      <span class="logo-text">CAT Free Courses</span>
     </a>
     <nav class="site-nav">
       <a href="index.html" class="nav-link">← Back to Home</a>
@@ -65,7 +65,7 @@
       </div>
 
       <div class="course-summary-card">
-        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">Premium CAT Courses Provided by HYMBA</p>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">Premium CAT Courses Provided by CFC</p>
         <h3 id="cs-name" style="color:var(--gold-light);font-family:'Playfair Display',serif;"></h3>
         <div class="cs-price">
           <span class="cs-original" id="cs-original"></span>
@@ -202,7 +202,7 @@
 <footer id="site-footer">
   <div class="footer-inner">
     <div class="footer-bottom" style="border-top:none;padding-top:0;">
-      <p>© HY MBA TEAM. All rights reserved.</p>
+      <p>© CFC TEAM. All rights reserved.</p>
       <div style="display:flex;gap:16px;">
         <a href="privacy.html">Privacy</a>
         <a href="terms.html">Terms</a>
@@ -274,7 +274,7 @@ function generateQR() {
   box.style.display = 'flex';
   document.getElementById('qr-expired-msg').style.display = 'none';
   box.innerHTML = '';
-  const upiLink = `upi://pay?pa=${CONFIG.upi.id}&pn=${encodeURIComponent(CONFIG.upi.name)}&am=${currentPrice}&cu=${CONFIG.upi.currency}&tn=HYMBACAT2025`;
+  const upiLink = `upi://pay?pa=${CONFIG.upi.id}&pn=${encodeURIComponent(CONFIG.upi.name)}&am=${currentPrice}&cu=${CONFIG.upi.currency}&tn=CEGFC2025`;
   qrInstance = new QRCode(box, {
     text: upiLink,
     width: 200,
