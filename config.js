@@ -2,7 +2,7 @@ const CONFIG = {
   upi: {
     id: "hymba@ybl",
     name: "HYMBA CAT Course",
-    amount: 999,
+    amount: 1999,
     currency: "INR"
   },
   links: {
@@ -14,7 +14,7 @@ const CONFIG = {
   },
   course: {
     name: "hyegmba",
-    price: 999,
+    price: 1999,
     original_price: 40000,
     tagline: "India's Most Affordable Elite CAT Preparation",
     target_years: ["CAT 2026", "CAT 2027"],
@@ -33,7 +33,7 @@ const CONFIG = {
   testimonials: [
     {
       name: "Rahul M.",
-      text: "Best decision I made. Complete course at 999 is unreal. Lrdi are worth it.",
+      text: "Best decision I made. Complete course at 1999 is unreal. Lrdi are worth it.",
       stars: 5
     },
     {
