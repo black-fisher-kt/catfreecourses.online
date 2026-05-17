@@ -1,7 +1,7 @@
 const CONFIG = {
   upi: {
     id: "hymba@ybl",
-    name: "ElitesGrid CAT Course",
+    name: "HYMBA CAT Course",
     amount: 999,
     currency: "INR"
   },
@@ -13,12 +13,16 @@ const CONFIG = {
     telegram_admin: "https://t.me/hymbaadmin"
   },
   course: {
-    name: "Elites Grid CAT Course",
+    name: "hyegmba",
     price: 999,
     original_price: 40000,
     tagline: "India's Most Affordable Elite CAT Preparation",
     target_years: ["CAT 2026", "CAT 2027"],
     qr_timer_seconds: 300
+  },
+  coupons: {
+    "hymba14": 1499,
+    "hymba11": 1199
   },
   reviews_folder: "images/reviews/",
   // ADD STUDENT REVIEW SCREENSHOT FILENAMES HERE
@@ -51,7 +55,7 @@ const CONFIG = {
     },
     {
       q: "What exactly is included in the course?",
-      a: "Complete Elites Grid CAT 2025 course: recorded video lectures, notes, mock tests, PYQs, SimCAT sessions, Knockout sessions, VARC, LRDI and QA — all topics covered, sequentially arranged on Telegram."
+      a: "Complete CAT 2025 course: recorded video lectures, notes, mock tests, PYQs, SimCAT sessions, Knockout sessions, VARC, LRDI and QA — all topics covered, sequentially arranged on Telegram."
     },
     {
       q: "How will I receive the course after payment?",
