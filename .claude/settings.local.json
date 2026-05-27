@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "Bash(git commit -m 'Fix mobile hero - center caption, add glow to Join button, fix cutoff' -m '- Center hero caption \\(Free CAT Course\\) for professional look *)",
+      "Bash(git commit -m 'Fix mobile buttons - remove max-width constraint on enroll/demo container' -m '- Remove max-width: 500px constraint from button wrapper *)"
     ]
   }
 }

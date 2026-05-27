@@ -9,20 +9,9 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script src="config.js"></script>
-  <style>
-    .file-selected-name {
-      font-size: 0.82rem;
-      color: var(--gold-light);
-      margin-top: 6px;
-      font-weight: 600;
-    }
-    .submit-loader { display:none; }
-    .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none !important; }
-  </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <header id="site-header">
   <div class="header-inner">
     <a href="index.html" class="logo">
@@ -35,11 +24,9 @@
   </div>
 </header>
 
-<!-- CHECKOUT -->
 <main class="checkout-page">
   <div class="checkout-wrap">
 
-    <!-- Stepper -->
     <div class="stepper">
       <div class="step-node active" id="sn1">
         <div class="step-circle">1</div>
@@ -57,7 +44,7 @@
       </div>
     </div>
 
-    <!-- STEP 1: Course Details -->
+    <!-- STEP 1 -->
     <div class="checkout-panel active" id="panel1">
       <div class="panel-header">
         <h2>You're One Step Away</h2>
@@ -65,45 +52,45 @@
       </div>
 
       <div class="course-summary-card">
-        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">Premium CAT Courses Provided by CFC</p>
-        <h3 id="cs-name" style="color:var(--gold-light);font-family:'Playfair Display',serif;"></h3>
+        <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:8px;">Premium CAT Course by CFC</p>
+        <h3 id="cs-name" style="font-family:'Playfair Display',serif;color:var(--navy);font-size:1.3rem;margin-bottom:12px;"></h3>
         <div class="cs-price">
           <span class="cs-original" id="cs-original"></span>
           <span class="cs-current" id="cs-current"></span>
         </div>
         <ul class="cs-list">
           <li><span class="ck">✓</span> Complete Recorded Video Lectures</li>
-          <li><span class="ck">✓</span> Study Notes & PDFs</li>
+          <li><span class="ck">✓</span> Study Notes &amp; PDFs</li>
           <li><span class="ck">✓</span> Full-Length Mock Tests</li>
           <li><span class="ck">✓</span> PYQs with Solutions</li>
           <li><span class="ck">✓</span> SimCAT Sessions</li>
           <li><span class="ck">✓</span> Knockout Sessions</li>
           <li><span class="ck">✓</span> VARC — Complete Coverage</li>
-          <li><span class="ck">✓</span> LRDI & QA — All Topics</li>
+          <li><span class="ck">✓</span> LRDI &amp; QA — All Topics</li>
           <li><span class="ck">✓</span> 24×7 Telegram Support</li>
           <li><span class="ck">✓</span> Lifetime Telegram Access</li>
         </ul>
         <div class="course-meta" id="cs-meta"></div>
       </div>
 
-      <div class="coupon-section" style="margin-top: 20px; padding: 16px; background: rgba(201, 151, 58, 0.1); border-radius: 8px; border: 1px solid rgba(201, 151, 58, 0.3);">
-        <label style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 8px; display: block;">Have a coupon code?</label>
-        <div style="display: flex; gap: 10px;">
-          <input type="text" id="coupon-input" placeholder="Enter coupon code" style="flex: 1; padding: 10px 14px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.3); color: white; font-size: 0.95rem;">
-          <button onclick="applyCoupon()" style="padding: 10px 20px; background: var(--gold); color: #06060f; border: none; border-radius: 6px; font-weight: 600; cursor: pointer;">Apply</button>
+      <div class="coupon-section">
+        <label>Have a coupon code?</label>
+        <div class="coupon-row">
+          <input type="text" id="coupon-input" placeholder="e.g. HYMBA99">
+          <button onclick="applyCoupon()">Apply</button>
         </div>
-        <p id="coupon-message" style="font-size: 0.8rem; margin-top: 8px; color: var(--text-muted);"></p>
+        <p id="coupon-message" style="font-size:0.8rem;margin-top:8px;"></p>
       </div>
 
-      <div style="padding:16px 0 24px;display:flex;align-items:center;gap:10px;font-size:0.85rem;color:var(--text-muted);">
-        <span>🔒</span>
-        <span>Direct UPI payment — no middlemen, no payment gateway. Your money goes straight to our account.</span>
+      <div style="display:flex;align-items:center;gap:10px;font-size:0.85rem;color:var(--text-muted);padding:16px 0 20px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7A8099" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <span>Direct UPI — no middlemen, no payment gateway.</span>
       </div>
 
-      <button class="btn btn-primary btn-full" onclick="goStep(2)">Proceed to Payment →</button>
+      <button class="btn btn-navy btn-full" onclick="goStep(2)">Proceed to Payment →</button>
     </div>
 
-    <!-- STEP 2: Payment QR -->
+    <!-- STEP 2 -->
     <div class="checkout-panel" id="panel2">
       <div class="panel-header">
         <h2>Complete Your Payment</h2>
@@ -115,7 +102,7 @@
         <div id="qr-expired-msg" class="qr-expired-msg" style="display:none;">
           <span style="font-size:2rem;">⏰</span>
           <strong style="color:var(--danger);">QR Expired</strong>
-          <p>Click below to generate a new QR code.</p>
+          <p>Click below to regenerate.</p>
           <button class="btn btn-ghost" onclick="resetTimer()">Regenerate QR</button>
         </div>
 
@@ -138,21 +125,21 @@
         <ol>
           <li>Open PhonePe, GPay, Paytm, or any UPI app</li>
           <li>Scan the QR code above OR enter the UPI ID manually</li>
-          <li>Enter amount: <strong style="color:var(--gold-light)" id="payment-amount-display">₹1999</strong></li>
+          <li>Enter amount</li>
           <li>Complete the payment</li>
           <li>Note your UTR / Transaction ID — you'll need it next</li>
         </ol>
       </div>
 
-      <button class="btn btn-primary btn-full" onclick="goStep(3)">I Have Paid — Submit Proof →</button>
-      <button class="btn btn-ghost btn-full" style="margin-top:12px;" onclick="goStep(1)">← Go Back</button>
+      <button class="btn btn-navy btn-full" onclick="goStep(3)" style="margin-bottom:12px;">I Have Paid — Submit Proof →</button>
+      <button class="btn btn-ghost btn-full" onclick="goStep(1)">← Go Back</button>
     </div>
 
-    <!-- STEP 3: Submit Proof -->
+    <!-- STEP 3 -->
     <div class="checkout-panel" id="panel3">
       <div class="panel-header">
         <h2>Almost Done!</h2>
-        <p>Submit your payment screenshot and UTR number. It just take 2 miniuts to verify and you'll redirected into course .</p>
+        <p>Submit your payment screenshot and UTR number. Verification takes just 2 minutes.</p>
       </div>
 
       <div class="proof-form" id="proof-form">
@@ -175,10 +162,12 @@
         <div class="form-field">
           <label>Payment Screenshot</label>
           <label class="file-label" for="inp-screenshot">
-            <span class="file-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: 0 auto 10px; opacity: 0.8;">
-  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
-  <circle cx="12" cy="13" r="4" />
-</svg></span>
+            <span class="file-icon">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                <circle cx="12" cy="13" r="4"/>
+              </svg>
+            </span>
             <span class="file-text">Tap to upload screenshot</span>
             <span class="file-subtext">JPG, PNG accepted · Max 10MB</span>
           </label>
@@ -186,9 +175,8 @@
           <div class="file-selected-name" id="file-name-display"></div>
         </div>
 
-
-        <button class="btn btn-primary btn-full" id="submit-btn" onclick="submitForm(event)">
-          <span class="submit-text">Submit & Complete Enrollment</span>
+        <button class="btn btn-navy btn-full" id="submit-btn" onclick="submitForm(event)">
+          <span class="submit-text">Submit &amp; Complete Enrollment</span>
           <span class="submit-loader">Submitting...</span>
         </button>
         <button class="btn btn-ghost btn-full" style="margin-top:12px;" onclick="goStep(2)">← Go Back</button>
@@ -198,7 +186,6 @@
   </div>
 </main>
 
-<!-- FOOTER -->
 <footer id="site-footer">
   <div class="footer-inner">
     <div class="footer-bottom" style="border-top:none;padding-top:0;">
@@ -214,18 +201,15 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
-// Header scroll
 const header = document.getElementById('site-header');
 window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 40));
 
-// Populate from config
-document.getElementById('cs-name').textContent = 'Premium CAT 2025 — Complete Course @ ₹1999';
-document.getElementById('cs-original').textContent = '₹' + CONFIG.course.original_price.toLocaleString('en-IN');
+document.getElementById('cs-name').textContent = 'Complete CAT Premium Course';
+document.getElementById('cs-original').textContent = '₹' + (1299).toLocaleString('en-IN');
 document.getElementById('cs-current').textContent = '₹' + CONFIG.course.price;
 document.getElementById('pay-amount').textContent = CONFIG.course.price;
 document.getElementById('upi-display').textContent = CONFIG.upi.id;
-const tgLinks = document.querySelectorAll('#tg-note-link, #f-support');
-tgLinks.forEach(l => l.href = CONFIG.links.telegram_support);
+document.querySelectorAll('#f-support').forEach(l => l.href = CONFIG.links.telegram_support);
 
 const metaContainer = document.getElementById('cs-meta');
 CONFIG.course.target_years.forEach(y => {
@@ -239,35 +223,25 @@ supTag.className = 'meta-tag';
 supTag.textContent = '24×7 Support';
 metaContainer.appendChild(supTag);
 
-// Coupon System
 let currentPrice = CONFIG.course.price;
-let appliedCoupon = null;
 
 function applyCoupon() {
-  const couponInput = document.getElementById('coupon-input').value.trim().toLowerCase();
-  const messageEl = document.getElementById('coupon-message');
-
-  if (!couponInput) {
-    messageEl.textContent = 'Please enter a coupon code.';
-    messageEl.style.color = 'var(--danger)';
-    return;
-  }
-
-  if (CONFIG.coupons && CONFIG.coupons[couponInput]) {
-    currentPrice = CONFIG.coupons[couponInput];
-    appliedCoupon = couponInput;
+  const val = document.getElementById('coupon-input').value.trim().toLowerCase();
+  const msg = document.getElementById('coupon-message');
+  if (!val) { msg.textContent = 'Please enter a coupon code.'; msg.style.color = 'var(--danger)'; return; }
+  if (CONFIG.coupons && CONFIG.coupons[val]) {
+    currentPrice = CONFIG.coupons[val];
     document.getElementById('cs-current').textContent = '₹' + currentPrice;
     document.getElementById('pay-amount').textContent = currentPrice;
     document.getElementById('payment-amount-display').textContent = '₹' + currentPrice;
-    messageEl.textContent = 'Coupon applied! Price updated to ₹' + currentPrice;
-    messageEl.style.color = '#22c55e';
+    msg.textContent = '✓ Coupon applied! Price updated to ₹' + currentPrice;
+    msg.style.color = 'var(--success)';
   } else {
-    messageEl.textContent = 'Invalid coupon code. Try hymba14 or hymba11';
-    messageEl.style.color = 'var(--danger)';
+    msg.textContent = 'Invalid coupon code.';
+    msg.style.color = 'var(--danger)';
   }
 }
 
-// QR Generation
 let qrInstance = null;
 function generateQR() {
   const box = document.getElementById('qr-box');
@@ -275,46 +249,27 @@ function generateQR() {
   document.getElementById('qr-expired-msg').style.display = 'none';
   box.innerHTML = '';
   const upiLink = `upi://pay?pa=${CONFIG.upi.id}&pn=${encodeURIComponent(CONFIG.upi.name)}&am=${currentPrice}&cu=${CONFIG.upi.currency}&tn=CEGFC2025`;
-  qrInstance = new QRCode(box, {
-    text: upiLink,
-    width: 200,
-    height: 200,
-    colorDark: '#1a1a2e',
-    colorLight: '#ffffff',
-    correctLevel: QRCode.CorrectLevel.H
-  });
+  qrInstance = new QRCode(box, { text: upiLink, width: 190, height: 190, colorDark: '#1B2340', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.H });
 }
 
-// Timer
 let timerInterval = null;
 let totalSeconds = CONFIG.course.qr_timer_seconds || 300;
 let timeLeft = totalSeconds;
 
-function formatTime(s) {
-  const m = Math.floor(s / 60);
-  const sec = s % 60;
-  return `${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
-}
+function formatTime(s) { const m = Math.floor(s/60); return `${String(m).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`; }
 
 function startTimer() {
   clearInterval(timerInterval);
   timeLeft = totalSeconds;
   const fill = document.getElementById('timer-fill');
   const display = document.getElementById('timer-display');
-  fill.style.width = '100%';
-  fill.classList.remove('warning');
-  display.classList.remove('warning');
-  display.textContent = formatTime(timeLeft);
-
+  fill.style.width = '100%'; fill.classList.remove('warning');
+  display.classList.remove('warning'); display.textContent = formatTime(timeLeft);
   timerInterval = setInterval(() => {
     timeLeft--;
-    const pct = (timeLeft / totalSeconds) * 100;
-    fill.style.width = pct + '%';
+    fill.style.width = (timeLeft/totalSeconds*100) + '%';
     display.textContent = formatTime(timeLeft);
-    if (timeLeft <= 60) {
-      fill.classList.add('warning');
-      display.classList.add('warning');
-    }
+    if (timeLeft <= 60) { fill.classList.add('warning'); display.classList.add('warning'); }
     if (timeLeft <= 0) {
       clearInterval(timerInterval);
       document.getElementById('qr-box').style.display = 'none';
@@ -324,55 +279,34 @@ function startTimer() {
   }, 1000);
 }
 
-function resetTimer() {
-  generateQR();
-  startTimer();
-}
+function resetTimer() { generateQR(); startTimer(); }
 
-// Copy UPI
 document.getElementById('copy-btn').addEventListener('click', () => {
   navigator.clipboard.writeText(CONFIG.upi.id).then(() => {
     const btn = document.getElementById('copy-btn');
     btn.textContent = 'Copied!';
-    btn.style.background = 'var(--gold)';
-    btn.style.color = '#06060f';
-    setTimeout(() => {
-      btn.textContent = 'Copy';
-      btn.style.background = '';
-      btn.style.color = '';
-    }, 2500);
+    btn.style.background = 'var(--gold)'; btn.style.color = 'var(--navy)';
+    setTimeout(() => { btn.textContent = 'Copy'; btn.style.background = ''; btn.style.color = ''; }, 2500);
   });
 });
 
-// File input display
 document.getElementById('inp-screenshot').addEventListener('change', function() {
-  const display = document.getElementById('file-name-display');
-  display.textContent = this.files[0] ? '✓ ' + this.files[0].name : '';
+  document.getElementById('file-name-display').textContent = this.files[0] ? '✓ ' + this.files[0].name : '';
 });
 
-// Step navigation
 function goStep(n) {
   [1,2,3].forEach(i => {
-    document.getElementById(`panel${i}`).classList.toggle('active', i === n);
+    document.getElementById(`panel${i}`).classList.toggle('active', i===n);
     const node = document.getElementById(`sn${i}`);
-    node.classList.toggle('active', i === n);
-    node.classList.toggle('done', i < n);
-    if (i < n) node.querySelector('.step-circle').textContent = '✓';
-    else node.querySelector('.step-circle').textContent = i;
+    node.classList.toggle('active', i===n);
+    node.classList.toggle('done', i<n);
+    node.querySelector('.step-circle').textContent = i<n ? '✓' : i;
   });
-  [1,2].forEach(i => {
-    const line = document.getElementById(`sl${i}`);
-    if (line) line.classList.toggle('done', i < n);
-  });
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-
-  if (n === 2) {
-    generateQR();
-    startTimer();
-  }
+  [1,2].forEach(i => { const l = document.getElementById(`sl${i}`); if(l) l.classList.toggle('done', i<n); });
+  window.scrollTo({top:0,behavior:'smooth'});
+  if (n===2) { generateQR(); startTimer(); }
 }
 
-// Form submission
 function submitForm(e) {
   e.preventDefault();
   const name = document.getElementById('inp-name').value.trim();
@@ -380,20 +314,12 @@ function submitForm(e) {
   const phone = document.getElementById('inp-phone').value.trim();
   const utr = document.getElementById('inp-utr').value.trim();
   const file = document.getElementById('inp-screenshot').files[0];
-
-  if (!name || !email || !phone || !utr || !file) {
-    alert('Please fill all fields and upload your payment screenshot.');
-    return;
-  }
-
+  if (!name||!email||!phone||!utr||!file) { alert('Please fill all fields and upload your payment screenshot.'); return; }
   const btn = document.getElementById('submit-btn');
   btn.disabled = true;
   btn.querySelector('.submit-text').style.display = 'none';
   btn.querySelector('.submit-loader').style.display = 'inline';
-
-  setTimeout(() => {
-    window.location.href = 'thankyou.html';
-  }, 1500);
+  setTimeout(() => { window.location.href = 'thankyou.html'; }, 1500);
 }
 </script>
 </body>

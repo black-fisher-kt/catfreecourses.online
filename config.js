@@ -7,22 +7,22 @@ const CONFIG = {
   },
   links: {
     telegram_support: "https://t.me/catcoursemba",
-    telegram_demo_proofs: "https://t.me/+lVe36UlSraQyMmRl",
+    telegram_demo_proofs: "https://t.me/+M_Fjrp1mIFo2YTVl",
     free_resources: "https://t.me/freecatresourses",
     telegram_main: "https://t.me/catcoursemba",
     telegram_admin: "https://t.me/hymbaadmin"
   },
   course: {
     name: "CEGFC",
-    price: 1999,
+    price: 1299,
     original_price: 40000,
     tagline: "India's Most Affordable Elite CAT Preparation",
     target_years: ["CAT 2026", "CAT 2027"],
     qr_timer_seconds: 300
   },
   coupons: {
-    "hymba14": 1499,
-    "hymba11": 1199
+    "hymba99": 999,
+    "hymba11": 799
   },
   reviews_folder: "images/reviews/",
   // ADD STUDENT REVIEW SCREENSHOT FILENAMES HERE
