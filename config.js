@@ -8,7 +8,7 @@ const CONFIG = {
   links: {
     telegram_support: "https://t.me/catcoursemba",
     telegram_demo_proofs: "https://t.me/+M_Fjrp1mIFo2YTVl",
-    free_resources: "https://t.me/freecatresourses",
+    free_resources: "https://t.me/addlist/cK8q9xP8trZjYTg1",
     telegram_main: "https://t.me/catcoursemba",
     telegram_admin: "https://t.me/hymbaadmin"
   },
