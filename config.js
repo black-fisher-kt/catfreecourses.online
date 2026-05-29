@@ -22,7 +22,8 @@ const CONFIG = {
   },
   coupons: {
     "hymba99": 999,
-    "hymba11": 799
+    "hymba11": 799,
+    "hymba199": 199
   },
   reviews_folder: "images/reviews/",
   // ADD STUDENT REVIEW SCREENSHOT FILENAMES HERE

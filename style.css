@@ -1394,3 +1394,122 @@ input[type="file"] { display: none; }
   .hamburger, .mobile-menu { display: none !important; }
   body { background: white; color: black; }
 }
+
+/* ---- OFFER STRIP ---- */
+.offer-strip {
+  background: var(--navy);
+  border-bottom: 1px solid var(--gold-border);
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.offer-scroll-area {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.offer-scroll-area::before,
+.offer-scroll-area::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 60px;
+  z-index: 2;
+  pointer-events: none;
+}
+.offer-scroll-area::before {
+  left: 0;
+  background: linear-gradient(to right, var(--navy), transparent);
+}
+.offer-scroll-area::after {
+  right: 0;
+  background: linear-gradient(to left, var(--navy), transparent);
+}
+
+.offer-track {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  width: max-content;
+  animation: offerscroll 28s linear infinite;
+}
+
+.offer-item {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: rgba(245, 240, 232, 0.75);
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+
+.offer-item strong { color: var(--gold); font-weight: 700; }
+
+.offer-tag {
+  display: inline-block;
+  background: var(--gold-dim);
+  border: 1px solid var(--gold-border);
+  color: var(--gold);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.offer-sep {
+  color: var(--gold-border);
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.offer-timer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(201,168,76,0.08);
+  border: 1px solid var(--gold-border);
+  border-radius: 6px;
+  padding: 5px 14px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-right: 16px;
+  margin-left: 12px;
+}
+
+.timer-label {
+  font-size: 0.72rem;
+  color: rgba(245,240,232,0.5);
+  margin-right: 6px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.timer-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--gold);
+  min-width: 20px;
+  text-align: center;
+}
+
+.timer-unit {
+  font-size: 0.68rem;
+  color: rgba(245,240,232,0.4);
+  margin-right: 4px;
+  font-weight: 500;
+}
+
+@keyframes offerscroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@media (max-width: 768px) {
+  .offer-timer { display: none; }
+}

@@ -39,6 +39,36 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
   </div>
 </header>
 
+<!-- OFFER STRIP -->
+<div class="offer-strip">
+  <div class="offer-scroll-area">
+    <div class="offer-track">
+      <span class="offer-item"><span class="offer-tag">LIMITED OFFER</span> Use code <strong>HYMBA199</strong> — Full Premium CAT Course at just <strong>₹199</strong></span>
+      <span class="offer-sep">·</span>
+      <span class="offer-item"><span class="offer-tag">LIMITED OFFER</span> Use code <strong>HYMBA199</strong> — Full Premium CAT Course at just <strong>₹199</strong></span>
+      <span class="offer-sep">·</span>
+      <span class="offer-item"><span class="offer-tag">LIMITED OFFER</span> Use code <strong>HYMBA199</strong> — Full Premium CAT Course at just <strong>₹199</strong></span>
+      <span class="offer-sep">·</span>
+      <span class="offer-item"><span class="offer-tag">LIMITED OFFER</span> Use code <strong>HYMBA199</strong> — Full Premium CAT Course at just <strong>₹199</strong></span>
+      <span class="offer-sep">·</span>
+      <span class="offer-item"><span class="offer-tag">LIMITED OFFER</span> Use code <strong>HYMBA199</strong> — Full Premium CAT Course at just <strong>₹199</strong></span>
+      <span class="offer-sep">·</span>
+      <span class="offer-item"><span class="offer-tag">LIMITED OFFER</span> Use code <strong>HYMBA199</strong> — Full Premium CAT Course at just <strong>₹199</strong></span>
+      <span class="offer-sep">·</span>
+      <span class="offer-item"><span class="offer-tag">LIMITED OFFER</span> Use code <strong>HYMBA199</strong> — Full Premium CAT Course at just <strong>₹199</strong></span>
+      <span class="offer-sep">·</span>
+      <span class="offer-item"><span class="offer-tag">LIMITED OFFER</span> Use code <strong>HYMBA199</strong> — Full Premium CAT Course at just <strong>₹199</strong></span>
+    </div>
+  </div>
+  <div class="offer-timer" id="offer-timer">
+    <span class="timer-label">Ends in</span>
+    <span class="timer-val" id="timer-d">01</span><span class="timer-unit">d</span>
+    <span class="timer-val" id="timer-h">16</span><span class="timer-unit">h</span>
+    <span class="timer-val" id="timer-m">00</span><span class="timer-unit">m</span>
+    <span class="timer-val" id="timer-s">00</span><span class="timer-unit">s</span>
+  </div>
+</div>
+
 <!-- Mobile Menu -->
 <div class="mobile-menu" id="mobile-menu">
   <a href="index.html">Home</a>
@@ -418,6 +448,44 @@ const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ===== OFFER TIMER =====
+(function() {
+  const RESET_AT_SECONDS = 5 * 3600; // 5 hours
+  const START_SECONDS    = (1 * 86400) + (16 * 3600); // 1d 16h
+
+  const KEY = 'offer_end_ts';
+  let endTs = parseInt(localStorage.getItem(KEY) || '0');
+  const now = Math.floor(Date.now() / 1000);
+
+  if (!endTs || endTs <= now) {
+    endTs = now + START_SECONDS;
+    localStorage.setItem(KEY, endTs);
+  }
+
+  function update() {
+    const remaining = endTs - Math.floor(Date.now() / 1000);
+
+    if (remaining <= RESET_AT_SECONDS) {
+      endTs = Math.floor(Date.now() / 1000) + START_SECONDS;
+      localStorage.setItem(KEY, endTs);
+    }
+
+    const d = Math.floor(remaining / 86400);
+    const h = Math.floor((remaining % 86400) / 3600);
+    const m = Math.floor((remaining % 3600) / 60);
+    const s = remaining % 60;
+
+    document.getElementById('timer-d').textContent = String(d).padStart(2,'0');
+    document.getElementById('timer-h').textContent = String(h).padStart(2,'0');
+    document.getElementById('timer-m').textContent = String(m).padStart(2,'0');
+    document.getElementById('timer-s').textContent = String(s).padStart(2,'0');
+  }
+
+  update();
+  setInterval(update, 1000);
+})();
+
 </script>
 </body>
 </html>
